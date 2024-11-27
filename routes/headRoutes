@@ -1,0 +1,25 @@
+const express = require('express');
+const {
+    registerHead,
+    loginHead,
+    getRecentAssignments,
+    getAllAssignments,
+    acceptAssignment,
+    rejectAssignment,
+    overturnDecision,
+} = require('../controllers/headController');
+
+const router = express.Router();
+
+// Auth Routes
+router.post('/register', registerHead);
+router.post('/login', loginHead);
+
+// Assignment Routes
+router.get('/assignments/recent', getRecentAssignments); 
+router.get('/assignments', getAllAssignments); 
+router.post('/assignments/:id/accept', acceptAssignment); 
+router.post('/assignments/:id/reject', rejectAssignment); 
+router.post('/assignments/:id/overturn', overturnDecision); 
+
+module.exports = router;

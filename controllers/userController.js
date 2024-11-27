@@ -71,7 +71,7 @@ exports.uploadAssignment = async (req, res) => {
         const admin = await Admin.findById(adminId);
         if (!admin) return res.status(404).json({ msg: 'Admin not found' });
 
-        const assignment = new Assignment({ userId, task, adminId });
+        const assignment = new Assignment({ userId, task, adminId, createdAt: new Date()});
         await assignment.save();
 
         res.json({ msg: 'Assignment uploaded successfully', assignment });

@@ -1,11 +1,27 @@
 const mongoose = require('mongoose');
 
-const assignmentSchema = new mongoose.Schema({
+const AssignmentSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
+    head: { type: mongoose.Schema.Types.ObjectId, ref: 'Head' },
     task: { type: String, required: true },
-    adminId: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
-    status: { type: String, enum: ['Pending', 'Accepted', 'Rejected'], default: 'Pending' },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    status: { 
+        type: String, 
+        enum: ['Pending', 'Accepted', 'Rejected'], 
+        default: 'Pending' 
+    },
+    label: { type: String, default: '' }, // Optional label for additional info
+    adminDecision: {
+        type: String,
+        enum: ['Accepted', 'Rejected', 'Pending'],
+        default: 'Pending'
+    },
+    headDecision: {
+        type: String,
+        enum: ['Accepted', 'Rejected', 'Overturned'],
+        default: 'Pending'
+    },
 });
 
-module.exports = mongoose.model('Assignment', assignmentSchema);
+module.exports = mongoose.model('Assignment', AssignmentSchema);
