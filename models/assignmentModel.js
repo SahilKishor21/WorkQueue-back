@@ -5,6 +5,7 @@ const AssignmentSchema = new mongoose.Schema({
     admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin', required: true },
     head: { type: mongoose.Schema.Types.ObjectId, ref: 'Head' },
     task: { type: String, required: true },
+    filePath: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     status: { 
         type: String, 

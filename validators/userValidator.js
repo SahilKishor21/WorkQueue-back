@@ -22,9 +22,17 @@ const loginValidation = (data) => {
 // Assignment Upload Validation
 const uploadAssignmentValidation = (data) => {
     const schema = Joi.object({
-        task: Joi.string().min(3).required(),
-        adminId: Joi.string().required()
+        title: Joi.string().min(3).required(), 
+        adminId: Joi.string().required(), 
+        file: Joi.object({
+            originalname: Joi.string().required(), 
+            mimetype: Joi.string()
+                .valid('application/pdf', 'application/vnd.ms-powerpoint', 'text/csv')
+                .required(), 
+            size: Joi.number().max(5 * 1024 * 1024).required()           
+        }).required() 
     });
+
     return schema.validate(data);
 };
 

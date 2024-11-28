@@ -11,6 +11,7 @@ const app = express();
 
 // Create an HTTP server instance to bind with Socket.IO
 const server = http.createServer(app);
+app.use('/uploads', express.static('uploads'));
 
 
 const io = new Server(server, {
@@ -44,6 +45,7 @@ io.on('connection', (socket) => {
 app.use('/api/users', userRoutes);
 app.use('/api/admins', adminRoutes);
 app.use('/api/head', headRoutes);
+
 
 
 app.set('io', io); // with this we can use app.get('io') to access it in other files
